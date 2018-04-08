@@ -3,6 +3,7 @@ from french_lefff_lemmatizer.french_lefff_lemmatizer import FrenchLefffLemmatize
 
 
 class FrenchLemmatizer(object):
+    name = 'lefff'
 
     SPACY_WORDNET_DIC = {'ADJ': 'a',
                          'ADV': 'r',
@@ -16,9 +17,6 @@ class FrenchLemmatizer(object):
         self.lemmatizer = FrenchLefffLemmatizer()
 
     def __call__(self, doc):
-        return self.lemmatize(doc)
-
-    def lemmatize(self, doc):
         for token in doc:
             wn_pos = self.SPACY_WORDNET_DIC[token.pos_] if token.pos_ in self.SPACY_WORDNET_DIC else token.pos_
             lemma = self.lemmatizer.lemmatize(token.text, wn_pos)
